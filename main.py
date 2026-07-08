@@ -1,31 +1,14 @@
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
-
+from fastapi import FastAPI
+from app.routers import users
+from logger import logger
+from prometheus_fastapi_instrumentator import Instrumentator
 
 app = FastAPI()
 
-items = []
+Instrumentator().instrument(app).expose(app)
+app.include_router(users.router)
 
-class Item(BaseModel):
-    id: int
-    name: str
-    price: float
-
-# create
-
-it = Item(
-    id=22, 
-    name="Darshan",
-    price=20.2)
-
-items.append(it)
-
-@app.post("/items")
-def create_items(item: Item):
-    items.append(item)
-    return {"message": "Item create", "item": item}    
-
-
-@app.get("/items")
-def get_items():
-    return items
+@app.get("/")
+def root():
+    logger.info("Home endpoint called")
+    return {"message": "API Running"}

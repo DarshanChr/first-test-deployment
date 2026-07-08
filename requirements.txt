@@ -1,2 +1,4 @@
-fastapi
+fastapi~=0.139.0
 uvicorn
+pydantic~=2.13.4
+prometheus-fastapi-instrumentator
