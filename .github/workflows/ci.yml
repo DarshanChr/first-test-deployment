@@ -48,6 +48,8 @@ jobs:
       - name: Clone Helm Repository
         run: |
           git clone https://${{ secrets.HELM_REPO_USERNAME }}:${{ secrets.HELM_REPO_TOKEN }}@github.com/DarshanChr/fast-api-helm.git
+          cd fast-api-helm
+          git checkout develop
 
       - name: Update Helm values.yaml
         run: |
