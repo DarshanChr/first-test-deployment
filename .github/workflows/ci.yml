@@ -64,7 +64,7 @@ jobs:
           git add values.yaml
           git commit -m "Update image tag to ${IMAGE_TAG}" || echo "No changes"
 
-          git push origin main
+          git push origin develop
 
       - name: Verify Application
         run: |
